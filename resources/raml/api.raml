@@ -1,0 +1,68 @@
+#%RAML 1.0
+title: S2VIZ
+version: v1
+
+types:
+  channelMapTypes:
+    enum: [visible,vegitation,waterVapor]
+
+  generation_params:
+    type: object
+    properties:
+      utmZone: integer
+      latitudeBand: string
+      gridSquare: string
+      date: string
+      channelMap: channelMapTypes
+
+  combinedJpeg:
+    type: file
+    maxLength: 307200
+
+  emptyRespones:
+    type: object
+    properties:
+      msg: string
+      descr: string
+  errorResponse:
+     type: object
+     properties:
+       msg: string
+  infoResponse:
+    type: object
+    properties:
+      info: string
+
+
+
+/v1/s2viz/:
+  /help:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: infoResponse
+  /generate-image:
+    description: create combined images of S2-Granule
+    post:
+      body:
+        application/json:
+          type: generation_params
+      responses:
+        201:
+          body:
+            image/jpeg:
+              type: combinedJpeg
+        400:
+          body:
+            application/json:
+              type: emptyRespones
+        404:
+          body:
+            application/json:
+              type: emptyRespones
+        500:
+          body:
+            application/json:
+              type: errorResponse
