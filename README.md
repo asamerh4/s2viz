@@ -67,7 +67,7 @@ docker rm $(docker ps -a -q)
 
 ### waterVapor
 `{"utmZone": 33,"latitudeBand": "U","gridSquare": "UP","date": "2018-08-17","channelMap": "waterVapor"}`
-![alt text](docs/waterVapor.jpg "Infrared")
+![alt text](docs/watervapor.jpg "Infrared")
 
 ### vegetation
 `{"utmZone": 33,"latitudeBand": "U","gridSquare": "UP","date": "2018-08-17","channelMap": "vegetation"}`
