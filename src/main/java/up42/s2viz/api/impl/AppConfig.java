@@ -3,6 +3,7 @@ package up42.s2viz.api.impl;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 public class AppConfig extends ResourceConfig
 {
@@ -32,6 +33,7 @@ public class AppConfig extends ResourceConfig
 	public AppConfig()
 	{
 
+		register(MultiPartFeature.class);
 		register(V1S2VizResourceImpl.class);
 		
 		logger.info(splash1());

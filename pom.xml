@@ -8,19 +8,18 @@
   <properties>
     <!-- most important dependency versions here... -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <postgresql.version>42.2.5</postgresql.version>
-    <dbcp2.version>2.5.0</dbcp2.version>
     <jersey.version>2.25</jersey.version>
     <jackson.version>2.9.6</jackson.version>
     <log4j.version>2.11.1</log4j.version>
-    <shiro.version>1.4.0</shiro.version>
     <jetty.version>9.4.12.v20180830</jetty.version>
-    <geotools.version>19.0</geotools.version>
-    <pac4j.version>3.4.0</pac4j.version>
-    <buji.version>4.1.0</buji.version>
+    <gdal.version>2.4.0</gdal.version>
   </properties>
   <dependencies>
-    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+    </dependency>
     <!-- jax-rs -->
     <dependency>
       <groupId>commons-lang</groupId>
@@ -51,6 +50,11 @@
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-multipart</artifactId>
       <version>${jersey.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>javax.mail-api</artifactId>
+      <version>1.5.5</version>
     </dependency>
     <dependency>
       <groupId>javax.json</groupId>
@@ -94,17 +98,6 @@
       <artifactId>log4j-slf4j-impl</artifactId>
       <version>${log4j.version}</version>
     </dependency>
-    <!-- apache shiro -->
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-core</artifactId>
-      <version>${shiro.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-web</artifactId>
-      <version>${shiro.version}</version>
-    </dependency>
     <!-- javax -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -128,6 +121,11 @@
       <version>1.1.1</version>
     </dependency>
     <!-- required when using jdk 9++ END-->
+   <dependency>
+     <groupId>org.gdal</groupId>
+     <artifactId>gdal</artifactId>
+     <version>${gdal.version}</version>
+   </dependency>
   </dependencies>
   <repositories>
     <repository>
@@ -169,7 +167,7 @@
 		<configuration>
 		  <archive>
 		    <manifest>
-			  <mainClass>up42.s2viz.api.impl.RunS2VizApi</mainClass>
+			  <mainClass>up42.s2viz.api.Main</mainClass>
 			</manifest>
 	      </archive>
 		  <descriptorRefs>

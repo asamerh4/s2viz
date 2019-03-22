@@ -4,7 +4,7 @@ version: v1
 
 types:
   channelMapTypes:
-    enum: [visible,vegitation,waterVapor]
+    enum: [visible,vegetation,waterVapor,infrared]
 
   generation_params:
     type: object
@@ -19,7 +19,7 @@ types:
     type: file
     maxLength: 307200
 
-  emptyRespones:
+  emptyResponse:
     type: object
     properties:
       msg: string
@@ -35,9 +35,9 @@ types:
 
 
 
-/v1/s2viz/:
+/v1/s2viz:
   /help:
-    get:
+    post:
       responses:
         200:
           body:
@@ -57,11 +57,11 @@ types:
         400:
           body:
             application/json:
-              type: emptyRespones
+              type: emptyResponse
         404:
           body:
             application/json:
-              type: emptyRespones
+              type: emptyResponse
         500:
           body:
             application/json:
