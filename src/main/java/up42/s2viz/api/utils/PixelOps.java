@@ -97,9 +97,9 @@ public class PixelOps {
 			TranslateOptions to = new TranslateOptions(vec);
 
 			//create VRT's of each band
-			final Dataset test_red = gdal.Translate("", red, to);
-			final Dataset test_green = gdal.Translate("", green, to);
-			final Dataset test_blue = gdal.Translate("", blue, to);
+			final Dataset test_red = gdal.Translate(conf.getProperty("work_dir")+"//red.vrt", red, to);
+			final Dataset test_green = gdal.Translate(conf.getProperty("work_dir")+"//green.vrt", green, to);
+			final Dataset test_blue = gdal.Translate(conf.getProperty("work_dir")+"//blue.vrt", blue, to);
 
 			//create Dataset-Array
 			Dataset[] rgb = new Dataset[3];
@@ -133,6 +133,9 @@ public class PixelOps {
 			BufferedImage image = ImageIO.read(jpegFile);
 			jpegFile.delete();
 
+            test_red.delete();
+            test_green.delete();
+            test_blue.delete(); 
 			return image;
 
 		} catch (Exception e) {
