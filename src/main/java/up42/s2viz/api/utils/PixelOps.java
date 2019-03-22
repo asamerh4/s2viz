@@ -18,11 +18,36 @@ public class PixelOps {
 
 	public static final Logger logger = LoggerFactory.getLogger(PixelOps.class);
 
+	public static String search(String value, ArrayList<String> prodNames) {
+	    for (String name : prodNames) {
+	        if (name.contains(value)) {
+	            return name;
+	        }
+	    }
+
+	    return null;
+	}
 	public static BufferedImage getRGB(int utmzone, String latitudeband, String gridsquare, String date, channelMapTypes channelmap, ArrayList<String> targetProduct) {
 		Properties conf = new ConfigProvider().getPropValues();
 		try {
 			logger.info(targetProduct.toString());
 
+			String B01 = search("B01.tif", targetProduct);
+			String B02 = search("B02.tif", targetProduct);
+			String B03 = search("B03.tif", targetProduct);
+			String B04 = search("B04.tif", targetProduct);
+			String B05 = search("B05.tif", targetProduct);
+			String B06 = search("B06.tif", targetProduct);
+			String B07 = search("B07.tif", targetProduct);
+			String B08 = search("B08.tif", targetProduct);
+			String B08A = search("B08A.tif", targetProduct);
+			String B09 = search("B09.tif", targetProduct);
+			String B10 = search("B10.tif", targetProduct);
+			String B11 = search("B11.tif", targetProduct);
+			String B12 = search("B12.tif", targetProduct);
+			String PVI = search("PVI.tif", targetProduct);
+			String TCI = search("TCI.tif", targetProduct);
+			
 			//register GDAL Formats
 			gdal.AllRegister();
 			
@@ -32,31 +57,32 @@ public class PixelOps {
 			Dataset blue =null;
 			String folder = conf.getProperty("granules_dir");
 
+			targetProduct.contains("");
 			//our 3 channelmaps
 			switch (channelmap) {
 			case visible: 
-				logger.info("VISIBLE --> red: "+targetProduct.get(3)+" green: "+targetProduct.get(2)+" blue: "+targetProduct.get(1) );
-				red = gdal.Open(folder+"//"+targetProduct.get(3));
-				green = gdal.Open(folder+"//"+targetProduct.get(2));
-				blue = gdal.Open(folder+"//"+targetProduct.get(1));
+				logger.info("VISIBLE --> red: "+B04+" green: "+B03+" blue: "+B02 );
+				red = gdal.Open(folder+"//"+B04);
+				green = gdal.Open(folder+"//"+B03);
+				blue = gdal.Open(folder+"//"+B02);
 				break; 
 			case vegetation: 
-				logger.info("VEGETATION --> red: "+targetProduct.get(5)+" green: "+targetProduct.get(6)+" blue: "+targetProduct.get(7) );
-				red = gdal.Open(folder+"//"+targetProduct.get(4));
-				green = gdal.Open(folder+"//"+targetProduct.get(5));
-				blue = gdal.Open(folder+"//"+targetProduct.get(6));
+				logger.info("VEGETATION --> red: "+B05+" green: "+B06+" blue: "+B07 );
+				red = gdal.Open(folder+"//"+B05);
+				green = gdal.Open(folder+"//"+B06);
+				blue = gdal.Open(folder+"//"+B07);
 				break; 
 			case waterVapor:
-				logger.info("WATERVAPOR --> red: "+targetProduct.get(0)+" green: "+targetProduct.get(10)+" blue: "+targetProduct.get(8) );
-				red = gdal.Open(folder+"//"+targetProduct.get(0));
-				green = gdal.Open(folder+"//"+targetProduct.get(9));
-				blue = gdal.Open(folder+"//"+targetProduct.get(8));
+				logger.info("WATERVAPOR --> red: "+B01+" green: "+B10+" blue: "+B09 );
+				red = gdal.Open(folder+"//"+B01);
+				green = gdal.Open(folder+"//"+B10);
+				blue = gdal.Open(folder+"//"+B09);
 				break;
 			case infrared:
-				logger.info("INFRARED --> red: "+targetProduct.get(7)+" green: "+targetProduct.get(3)+" blue: "+targetProduct.get(2) );
-				red = gdal.Open(folder+"//"+targetProduct.get(7));
-				green = gdal.Open(folder+"//"+targetProduct.get(3));
-				blue = gdal.Open(folder+"//"+targetProduct.get(2));
+				logger.info("INFRARED --> red: "+B08+" green: "+B04+" blue: "+B03 );
+				red = gdal.Open(folder+"//"+B08);
+				green = gdal.Open(folder+"//"+B04);
+				blue = gdal.Open(folder+"//"+B03);
 				break;
 			}
 
