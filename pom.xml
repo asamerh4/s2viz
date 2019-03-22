@@ -124,9 +124,7 @@
    <dependency>
      <groupId>org.gdal</groupId>
      <artifactId>gdal</artifactId>
-     <version>1.0</version>
-     <scope>system</scope>
-    <systemPath>${project.basedir}/src/lib/jars/gdal.jar</systemPath>
+     <version>${gdal.version}</version>
    </dependency>
   </dependencies>
   <repositories>
@@ -138,7 +136,7 @@
     <repository>
       <id>in-project</id>
       <name>In Project Repo</name>
-      <url>file://${project.basedir}/src/lib/jars</url>
+      <url>file://${project.basedir}/lib/jars</url>
    </repository>
   </repositories>
   <build>
